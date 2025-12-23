@@ -173,9 +173,9 @@ const VehicleSetupWizard: React.FC<Props> = ({ vehicle, onComplete, onCancel }) 
   return (
     <div className="fixed inset-0 z-[100] bg-slate-50 dark:bg-slate-900 flex flex-col animate-in fade-in duration-300">
       
-      {/* Header */}
+      {/* Header - Added additive padding for safe area top */}
       {step < 4 && (
-          <div className="pt-safe px-6 pb-4 bg-white dark:bg-slate-800 shadow-sm z-10">
+          <div className="px-6 pb-4 pt-[calc(1rem+env(safe-area-inset-top))] bg-white dark:bg-slate-800 shadow-sm z-10">
             <div className="max-w-md mx-auto">
                 <h1 className="text-xl font-bold text-slate-900 dark:text-white">{t('wizard_title')}</h1>
                 <p className="text-sm text-slate-500 dark:text-slate-400">{t('wizard_subtitle', { car: vehicle.model })}</p>
@@ -189,7 +189,7 @@ const VehicleSetupWizard: React.FC<Props> = ({ vehicle, onComplete, onCancel }) 
       )}
 
       {/* Content */}
-      <div className="flex-1 overflow-y-auto p-6 no-scrollbar flex flex-col justify-center">
+      <div className="flex-1 overflow-y-auto p-6 pb-40 no-scrollbar">
         <div className="max-w-md mx-auto space-y-6 w-full">
 
             {/* STEP 1: LEGAL */}
@@ -206,11 +206,12 @@ const VehicleSetupWizard: React.FC<Props> = ({ vehicle, onComplete, onCancel }) 
                     </div>
 
                     <div className="space-y-4">
-                        <div className="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                        {/* ITV Input: Added overflow-hidden and max-w-full to children */}
+                        <div className="bg-white dark:bg-slate-800 p-4 xs:p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
                             <label className="block text-sm font-bold text-slate-700 dark:text-slate-200 mb-3">{t('label_itv_date')}</label>
                             <input 
                                 type="date" 
-                                className="w-full bg-slate-50 dark:bg-slate-700/50 border-none rounded-xl p-3 font-semibold dark:text-white"
+                                className="w-full max-w-full box-border bg-slate-50 dark:bg-slate-700/50 border-none rounded-xl p-3 font-semibold dark:text-white appearance-none"
                                 value={itvDate}
                                 max={getToday()}
                                 onChange={e => setItvDate(e.target.value)}
@@ -229,11 +230,12 @@ const VehicleSetupWizard: React.FC<Props> = ({ vehicle, onComplete, onCancel }) 
                             )}
                         </div>
 
-                        <div className="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                        {/* Tax Input */}
+                        <div className="bg-white dark:bg-slate-800 p-4 xs:p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
                             <label className="block text-sm font-bold text-slate-700 dark:text-slate-200 mb-3">{t('label_tax_date')}</label>
                             <input 
                                 type="date" 
-                                className="w-full bg-slate-50 dark:bg-slate-700/50 border-none rounded-xl p-3 font-semibold dark:text-white"
+                                className="w-full max-w-full box-border bg-slate-50 dark:bg-slate-700/50 border-none rounded-xl p-3 font-semibold dark:text-white appearance-none"
                                 value={taxDate}
                                 min={getToday()}
                                 onChange={e => setTaxDate(e.target.value)}
@@ -256,7 +258,7 @@ const VehicleSetupWizard: React.FC<Props> = ({ vehicle, onComplete, onCancel }) 
                         </div>
                     </div>
 
-                    <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 space-y-6">
+                    <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 space-y-6 overflow-hidden">
                         
                         {/* KM Input */}
                         <div>
@@ -271,7 +273,7 @@ const VehicleSetupWizard: React.FC<Props> = ({ vehicle, onComplete, onCancel }) 
                                     inputMode="numeric"
                                     pattern="[0-9]*"
                                     placeholder={vehicle.currentMileage.toString()}
-                                    className="w-full bg-slate-50 dark:bg-slate-700/50 border-none rounded-xl p-3 pl-10 font-bold text-lg dark:text-white"
+                                    className="w-full max-w-full box-border bg-slate-50 dark:bg-slate-700/50 border-none rounded-xl p-3 pl-10 font-bold text-lg dark:text-white appearance-none"
                                     value={oilKm}
                                     onChange={e => setOilKm(e.target.value)}
                                 />
@@ -290,7 +292,7 @@ const VehicleSetupWizard: React.FC<Props> = ({ vehicle, onComplete, onCancel }) 
                                 <Calendar size={18} className="absolute left-3 top-3.5 text-slate-400" />
                                 <input 
                                     type="date" 
-                                    className="w-full bg-slate-50 dark:bg-slate-700/50 border-none rounded-xl p-3 pl-10 font-bold text-lg dark:text-white"
+                                    className="w-full max-w-full box-border bg-slate-50 dark:bg-slate-700/50 border-none rounded-xl p-3 pl-10 font-bold text-lg dark:text-white appearance-none"
                                     value={oilDate}
                                     max={getToday()}
                                     onChange={e => setOilDate(e.target.value)}
@@ -302,17 +304,17 @@ const VehicleSetupWizard: React.FC<Props> = ({ vehicle, onComplete, onCancel }) 
                         {oilKm && (
                             <div className="animate-in fade-in slide-in-from-top-2 pt-2 border-t border-slate-100 dark:border-slate-700">
                                 <label className="block text-sm font-bold text-slate-700 dark:text-slate-200 mb-2">{t('label_oil_interval')}</label>
-                                <div className="flex items-center gap-3 bg-slate-50 dark:bg-slate-700/50 p-2 rounded-xl">
+                                <div className="flex items-center gap-3 bg-slate-50 dark:bg-slate-700/50 p-2 rounded-xl overflow-hidden">
                                     <input 
                                         type="range"
                                         min="5000"
                                         max="30000"
                                         step="1000"
-                                        className="flex-1 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+                                        className="flex-1 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600 min-w-0"
                                         value={oilInterval}
                                         onChange={e => setOilInterval(Number(e.target.value))}
                                     />
-                                    <span className="font-mono font-bold text-sm bg-white dark:bg-slate-600 px-2 py-1 rounded shadow-sm dark:text-white">
+                                    <span className="font-mono font-bold text-sm bg-white dark:bg-slate-600 px-2 py-1 rounded shadow-sm dark:text-white whitespace-nowrap">
                                         {oilInterval.toLocaleString()} km
                                     </span>
                                 </div>
@@ -396,8 +398,8 @@ const VehicleSetupWizard: React.FC<Props> = ({ vehicle, onComplete, onCancel }) 
         </div>
       </div>
 
-      {/* Footer Controls */}
-      <div className="p-6 bg-white dark:bg-slate-800 border-t border-slate-100 dark:border-slate-700/50">
+      {/* Footer Controls - Fixed: Using calc to ADD safe area to standard padding */}
+      <div className="px-6 pt-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))] bg-white dark:bg-slate-800 border-t border-slate-100 dark:border-slate-700/50">
           <div className="max-w-md mx-auto flex gap-4">
               {step === 4 ? (
                   <button 
