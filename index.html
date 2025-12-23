@@ -5,26 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>CheckAuto</title>
     
-    <!-- PWA Configuration -->
-    <link rel="manifest" href="manifest.json" />
+    <link rel="manifest" href="./manifest.json" />
     <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
     <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="CheckAuto">
 
-    <!-- Icons -->
-    <link rel="icon" type="image/svg+xml" href="logo.svg" />
-    <link rel="apple-touch-icon" href="logo.svg" />
+    <link rel="icon" type="image/svg+xml" href="./logo.svg" />
+    <link rel="apple-touch-icon" href="./logo.svg" />
     
-    <!-- Add Inter Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
-        darkMode: 'class', // Changed from 'media' to 'class' for manual toggle
+        darkMode: 'class',
         theme: {
           extend: {
             fontFamily: {
@@ -47,20 +45,17 @@
       }
     </script>
     <style>
-      /* Smooth scrolling and mobile optimizations */
       body {
         -webkit-tap-highlight-color: transparent;
-        background-color: #0f172a; /* slate-900 (Dark Default) */
+        background-color: #0f172a;
         font-family: 'Inter', sans-serif;
-        overscroll-behavior-y: none; /* Prevents pull-to-refresh on mobile */
+        overscroll-behavior-y: none;
       }
       
-      /* Light mode override when 'dark' class is removed */
       html:not(.dark) body {
-        background-color: #f8fafc; /* slate-50 */
+        background-color: #f8fafc;
       }
 
-      /* Hide scrollbar for clean horizontal scrolling */
       .no-scrollbar::-webkit-scrollbar {
         display: none;
       }
@@ -69,7 +64,6 @@
         scrollbar-width: none;
       }
       
-      /* Glass effect utility class */
       .glass {
         background: rgba(255, 255, 255, 0.8);
         backdrop-filter: blur(16px);
@@ -82,7 +76,6 @@
         -webkit-backdrop-filter: blur(16px);
         border-top: 1px solid rgba(255, 255, 255, 0.3);
       }
-      /* Dark mode overrides for class-based strategy if needed */
       html.dark .glass {
         background: rgba(15, 23, 42, 0.7);
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -92,7 +85,6 @@
         border-top: 1px solid rgba(255, 255, 255, 0.05);
       }
       
-      /* Safe area padding for iPhones with notch */
       .pb-safe {
         padding-bottom: env(safe-area-inset-bottom);
       }
@@ -100,23 +92,24 @@
         padding-top: env(safe-area-inset-top);
       }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "firebase/": "https://esm.sh/firebase@^12.7.0/",
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
-    "recharts": "https://esm.sh/recharts@^3.6.0",
-    "date-fns": "https://esm.sh/date-fns@^4.1.0"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
-</head>
+    
+    <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@^19.2.3",
+        "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+        "react/": "https://esm.sh/react@^19.2.3/",
+        "firebase/": "https://esm.sh/firebase@^12.7.0/",
+        "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+        "recharts": "https://esm.sh/recharts@^3.6.0",
+        "date-fns": "https://esm.sh/date-fns@^4.1.0"
+      }
+    }
+    </script>
+    <link rel="stylesheet" href="./index.css">
+  </head>
   <body>
     <div id="root"></div>
-  <script type="module" src="/index.tsx"></script>
-</body>
+    <script type="module" src="./index.tsx"></script>
+  </body>
 </html>
