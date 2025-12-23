@@ -8,7 +8,10 @@
     <link rel="manifest" href="./manifest.json" />
     <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
     <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)">
+    
     <meta name="mobile-web-app-capable" content="yes">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="CheckAuto">
 
@@ -25,15 +28,9 @@
         darkMode: 'class',
         theme: {
           extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-            },
+            fontFamily: { sans: ['Inter', 'sans-serif'] },
             colors: {
-              slate: {
-                850: '#1e293b',
-                900: '#0f172a',
-                950: '#020617',
-              }
+              slate: { 850: '#1e293b', 900: '#0f172a', 950: '#020617' }
             },
             boxShadow: {
               'soft': '0 8px 30px rgba(0,0,0,0.04)',
@@ -51,19 +48,9 @@
         font-family: 'Inter', sans-serif;
         overscroll-behavior-y: none;
       }
-      
-      html:not(.dark) body {
-        background-color: #f8fafc;
-      }
-
-      .no-scrollbar::-webkit-scrollbar {
-        display: none;
-      }
-      .no-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
-      
+      html:not(.dark) body { background-color: #f8fafc; }
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       .glass {
         background: rgba(255, 255, 255, 0.8);
         backdrop-filter: blur(16px);
@@ -76,21 +63,10 @@
         -webkit-backdrop-filter: blur(16px);
         border-top: 1px solid rgba(255, 255, 255, 0.3);
       }
-      html.dark .glass {
-        background: rgba(15, 23, 42, 0.7);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      }
-      html.dark .glass-top {
-        background: rgba(15, 23, 42, 0.7);
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-      }
-      
-      .pb-safe {
-        padding-bottom: env(safe-area-inset-bottom);
-      }
-      .pt-safe {
-        padding-top: env(safe-area-inset-top);
-      }
+      html.dark .glass { background: rgba(15, 23, 42, 0.7); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+      html.dark .glass-top { background: rgba(15, 23, 42, 0.7); border-top: 1px solid rgba(255, 255, 255, 0.05); }
+      .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+      .pt-safe { padding-top: env(safe-area-inset-top); }
     </style>
     
     <script type="importmap">
@@ -106,7 +82,6 @@
       }
     }
     </script>
-    
   </head>
   <body>
     <div id="root"></div>
