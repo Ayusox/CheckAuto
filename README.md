@@ -1,20 +1,53 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+﻿# CheckAuto
 
-# Run and deploy your AI Studio app
+CheckAuto es una aplicación web para gestionar vehículos, mantenimientos y registros de servicio.
 
-This contains everything you need to run your app locally.
+## Características
 
-View your app in AI Studio: https://ai.studio/apps/drive/1Nr0XqaHdPx1z1rX6axwWq2ez8J28Mau1
+- Gestión de vehículos (crear, editar, eliminar)
+- Registro y historial de mantenimientos
+- Alertas y puntuación de salud del vehículo
+- Integración con Firebase (configurable)
 
-## Run Locally
+## Requisitos
 
-**Prerequisites:**  Node.js
+- Node.js 18+ y npm
 
+## Instalación (local)
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+1. Clona el repositorio o cópialo localmente.
+2. Instala dependencias:
+
+```bash
+npm install
+```
+
+3. Crea un archivo de configuración de Firebase si corresponde en `services/firebase.ts`.
+
+## Scripts útiles
+
+- `npm run dev`  Ejecuta la app en modo desarrollo (Vite).
+- `npm run build`  Construye la app para producción.
+- `npm run preview`  Previsualiza la build.
+
+Ejemplo:
+
+```bash
+npm run dev
+```
+
+## Estructura notable
+
+- `App.tsx`  Punto de entrada de la app.
+- `components/`  Componentes React reutilizables.
+- `views/`  Vistas principales: `Garage`, `History`, `Settings`, `VehicleDetail`.
+- `services/`  Integraciones (Firebase, DB, i18n, theme).
+
+## Contribuir
+
+1. Crea un branch por feature: `git checkout -b feat/nombre-feature`.
+2. Haz commits claros y abre un pull request.
+
+## Licencia y contacto
+
+Este proyecto pertenece al usuario `Ayusox`. Para preguntas o mejoras, contacta al propietario del repositorio.
