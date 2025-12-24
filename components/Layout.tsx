@@ -16,34 +16,37 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab, onTabChange, title
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex flex-col w-full max-w-md mx-auto relative shadow-2xl overflow-hidden box-border">
       
       {/* Header - Fixed Top with Safe Area Padding */}
-      <header className="glass fixed top-0 w-full max-w-md z-30 transition-all">
-        {/* pt-[env(safe-area-inset-top)] handles the Notch area */}
-        <div className="pt-[env(safe-area-inset-top)] px-6 py-4 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-                <div className="w-9 h-9 flex items-center justify-center shrink-0">
-                    <Logo className="w-full h-full text-indigo-600 dark:text-indigo-400" />
+      <header className="glass fixed top-0 w-full max-w-md z-30 transition-all border-b border-slate-100/50 dark:border-slate-800/50">
+        {/* pt-[env(safe-area-inset-top)] pushes content down below the notch/status bar */}
+        <div className="pt-[env(safe-area-inset-top)] w-full">
+            {/* H-16 (64px) ensures consistent height across the app. Flex items-center ensures vertical centering. */}
+            <div className="h-16 px-6 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 flex items-center justify-center shrink-0">
+                        <Logo className="w-full h-full text-indigo-600 dark:text-indigo-400" />
+                    </div>
+                    <h1 className="text-xl xs:text-2xl font-bold text-slate-900 dark:text-white tracking-tight truncate max-w-[200px] mt-0.5">{title}</h1>
                 </div>
-                <h1 className="text-xl xs:text-2xl font-bold text-slate-900 dark:text-white tracking-tight truncate max-w-[200px]">{title}</h1>
-            </div>
-            
-            <div className="flex items-center gap-2 shrink-0">
-                {showSettingsIcon && (
-                    <button onClick={() => onTabChange('settings')} className="p-2.5 hover:bg-black/5 dark:hover:bg-white/10 rounded-full transition-colors text-slate-600 dark:text-slate-300 active:scale-95">
-                        <Settings size={24} strokeWidth={2} />
-                    </button>
-                )}
+                
+                <div className="flex items-center gap-2 shrink-0">
+                    {showSettingsIcon && (
+                        <button onClick={() => onTabChange('settings')} className="p-2.5 hover:bg-black/5 dark:hover:bg-white/10 rounded-full transition-colors text-slate-600 dark:text-slate-300 active:scale-95">
+                            <Settings size={24} strokeWidth={2} />
+                        </button>
+                    )}
+                </div>
             </div>
         </div>
       </header>
 
       {/* Main Content - Scrollable Area */}
       {/* Dynamic Padding: 
-          Top = Header Height (~70px) + Safe Top 
+          Top = Header Height (4rem/64px) + Safe Top + Extra Spacing (1.5rem)
           Bottom = Nav Height (~80px) + Safe Bottom + Extra Spacing 
       */}
-      <main className="flex-1 w-full overflow-y-auto overflow-x-hidden p-6 space-y-6 dark:text-slate-200 no-scrollbar"
+      <main className="flex-1 w-full overflow-y-auto overflow-x-hidden px-6 pb-6 space-y-6 dark:text-slate-200 no-scrollbar"
             style={{
-                paddingTop: 'calc(5rem + env(safe-area-inset-top))', 
+                paddingTop: 'calc(4rem + env(safe-area-inset-top) + 1.5rem)', 
                 paddingBottom: 'calc(6rem + env(safe-area-inset-bottom))'
             }}
       >
