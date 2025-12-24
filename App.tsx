@@ -107,52 +107,27 @@ const App: React.FC = () => {
     return <Auth onLogin={handleLogin} />;
   }
 
-  const renderContent = () => {
-    if (selectedVehicleId) {
-      const v = vehicles.find(veh => veh.id === selectedVehicleId);
-      if (!v) { 
-        setSelectedVehicleId(null); 
-        return null; 
-      }
-      return (
-        <VehicleDetail 
-          vehicle={v}
-          configs={configs.filter(c => c.vehicleId === v.id)}
-          onBack={() => setSelectedVehicleId(null)}
-          onUpdateMileage={handleUpdateMileage}
-          onUpdateVehicle={handleUpdateVehicle}
-          onRecordService={handleRecordService}
-          onRefresh={handleRefresh}
-        />
-      );
+  // TOP LEVEL: Return Vehicle Detail directly to take over layout
+  if (selectedVehicleId) {
+    const v = vehicles.find(veh => veh.id === selectedVehicleId);
+    if (!v) { 
+      setSelectedVehicleId(null); 
+      return null; 
     }
+    return (
+      <VehicleDetail 
+        vehicle={v}
+        configs={configs.filter(c => c.vehicleId === v.id)}
+        onBack={() => setSelectedVehicleId(null)}
+        onUpdateMileage={handleUpdateMileage}
+        onUpdateVehicle={handleUpdateVehicle}
+        onRecordService={handleRecordService}
+        onRefresh={handleRefresh}
+      />
+    );
+  }
 
-    switch (activeTab) {
-      case 'garage':
-        return (
-          <Garage 
-            vehicles={vehicles}
-            configs={configs}
-            onSelectVehicle={setSelectedVehicleId}
-            onAddVehicle={handleAddVehicle}
-          />
-        );
-      case 'history':
-        return (
-          <History 
-            history={history}
-            vehicles={vehicles}
-            configs={configs}
-            onRefresh={handleRefresh}
-          />
-        );
-      case 'settings':
-        return <Settings onLogout={handleLogout} />;
-      default:
-        return null;
-    }
-  };
-
+  // Otherwise return standard Layout
   return (
     <Layout
       activeTab={activeTab}
@@ -161,7 +136,23 @@ const App: React.FC = () => {
       onLogout={handleLogout}
       showSettingsIcon={activeTab === 'garage'}
     >
-      {renderContent()}
+      {activeTab === 'garage' && (
+          <Garage 
+            vehicles={vehicles}
+            configs={configs}
+            onSelectVehicle={setSelectedVehicleId}
+            onAddVehicle={handleAddVehicle}
+          />
+      )}
+      {activeTab === 'history' && (
+          <History 
+            history={history}
+            vehicles={vehicles}
+            configs={configs}
+            onRefresh={handleRefresh}
+          />
+      )}
+      {activeTab === 'settings' && <Settings onLogout={handleLogout} />}
     </Layout>
   );
 };

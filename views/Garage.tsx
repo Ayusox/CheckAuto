@@ -29,9 +29,22 @@ const Garage: React.FC<Props> = ({ vehicles, configs, onSelectVehicle, onAddVehi
   // Wizard & New Car State
   const [setupVehicleId, setSetupVehicleId] = useState<string | null>(null);
   const [waitingForWizard, setWaitingForWizard] = useState(false);
-  const [newCar, setNewCar] = useState({ 
-    make: '', model: '', year: new Date().getFullYear(), plate: '', currentMileage: 0 
+  
+  // Use a flexible type for local form state to allow empty string for mileage
+  const [newCar, setNewCar] = useState<{
+    make: string;
+    model: string;
+    year: number;
+    plate: string;
+    currentMileage: string | number;
+  }>({ 
+    make: '', 
+    model: '', 
+    year: new Date().getFullYear(), 
+    plate: '', 
+    currentMileage: '' // Empty string so input placeholder shows instead of "0"
   });
+
   const [newCarImage, setNewCarImage] = useState<string | undefined>(undefined);
   
   // Refs
@@ -83,14 +96,26 @@ const Garage: React.FC<Props> = ({ vehicles, configs, onSelectVehicle, onAddVehi
 
   const handleAddSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (newCar.currentMileage < 0) return;
+    
+    // Convert empty string or string to number
+    const mileageNum = newCar.currentMileage === '' ? 0 : Number(newCar.currentMileage);
+
+    if (mileageNum < 0) return;
     
     setIsSubmitting(true);
     try {
-        await onAddVehicle({ ...newCar, image: newCarImage });
+        await onAddVehicle({ 
+            make: newCar.make,
+            model: newCar.model,
+            year: newCar.year,
+            plate: newCar.plate,
+            currentMileage: mileageNum,
+            image: newCarImage 
+        });
         setShowAddForm(false);
         setWaitingForWizard(true);
-        setNewCar({ make: '', model: '', year: new Date().getFullYear(), plate: '', currentMileage: 0 });
+        // Reset form
+        setNewCar({ make: '', model: '', year: new Date().getFullYear(), plate: '', currentMileage: '' });
         setNewCarImage(undefined);
     } catch (error) {
         console.error("Failed to add vehicle", error);
@@ -172,7 +197,16 @@ const Garage: React.FC<Props> = ({ vehicles, configs, onSelectVehicle, onAddVehi
              </div>
              <div className="space-y-1">
                 <label className="text-xs font-bold text-slate-400 uppercase tracking-wide pl-1">{t('current_mileage')} (km)</label>
-                <input type="number" inputMode="numeric" min="0" required className="w-full p-4 bg-slate-100 dark:bg-slate-700/50 dark:text-white rounded-2xl border-none focus:ring-0 font-semibold" placeholder={t('placeholder_km')} value={newCar.currentMileage} onChange={e => setNewCar({...newCar, currentMileage: Number(e.target.value)})} />
+                <input 
+                    type="number" 
+                    inputMode="numeric" 
+                    min="0" 
+                    required 
+                    className="w-full p-4 bg-slate-100 dark:bg-slate-700/50 dark:text-white rounded-2xl border-none focus:ring-0 font-semibold" 
+                    placeholder={t('placeholder_km')} 
+                    value={newCar.currentMileage} 
+                    onChange={e => setNewCar({...newCar, currentMileage: e.target.value})} 
+                />
              </div>
              
              <div className="flex gap-4 pt-4">
