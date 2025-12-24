@@ -19,10 +19,10 @@ export const registerUser = async (username: string, password: string): Promise<
   const userCredential = await createUserWithEmailAndPassword(auth, username, password);
   const fbUser = userCredential.user;
   
-  // Initialize User Settings
+  // Initialize User Settings - DEFAULT THEME SET TO DARK
   await setDoc(doc(db, 'users', fbUser.uid), {
     username: username,
-    settings: { theme: 'light', language: 'es', notifications: true },
+    settings: { theme: 'dark', language: 'es', notifications: true },
     createdAt: Timestamp.now()
   });
 
