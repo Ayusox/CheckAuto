@@ -360,7 +360,7 @@ const ModificationsModal: React.FC<Props> = ({ isOpen, onClose, userId, vehicleI
                             placeholder={t('placeholder_mod_name')}
                             value={name}
                             onChange={e => setName(e.target.value)}
-                            className="w-full bg-white dark:bg-slate-800 p-4 rounded-2xl font-bold text-slate-800 dark:text-white border-none focus:ring-2 focus:ring-indigo-500 shadow-sm"
+                            className="w-full max-w-full box-border bg-white dark:bg-slate-800 p-4 rounded-2xl font-bold text-slate-800 dark:text-white border-none focus:ring-2 focus:ring-indigo-500 shadow-sm"
                         />
                     </div>
 
@@ -382,7 +382,7 @@ const ModificationsModal: React.FC<Props> = ({ isOpen, onClose, userId, vehicleI
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-1">
+                        <div className="space-y-1 min-w-0">
                             <label className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-1">
                                 {isWishlist ? t('projected_cost') : t('mod_price')}
                             </label>
@@ -396,11 +396,11 @@ const ModificationsModal: React.FC<Props> = ({ isOpen, onClose, userId, vehicleI
                                     placeholder="0.00"
                                     value={cost}
                                     onChange={e => setCost(e.target.value)}
-                                    className="w-full bg-white dark:bg-slate-800 p-4 pl-10 rounded-2xl font-bold text-slate-800 dark:text-white border-none focus:ring-2 focus:ring-indigo-500 shadow-sm"
+                                    className="w-full max-w-full box-border bg-white dark:bg-slate-800 p-4 pl-10 rounded-2xl font-bold text-slate-800 dark:text-white border-none focus:ring-2 focus:ring-indigo-500 shadow-sm appearance-none min-w-0"
                                 />
                             </div>
                         </div>
-                        <div className="space-y-1">
+                        <div className="space-y-1 min-w-0">
                             <label className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-1">{t('mod_date')}</label>
                             <div className="relative">
                                 <Calendar size={16} className="absolute left-4 top-4 text-slate-400" />
@@ -409,7 +409,7 @@ const ModificationsModal: React.FC<Props> = ({ isOpen, onClose, userId, vehicleI
                                     required
                                     value={date}
                                     onChange={e => setDate(e.target.value)}
-                                    className="w-full bg-white dark:bg-slate-800 p-4 pl-10 rounded-2xl font-bold text-slate-800 dark:text-white border-none focus:ring-2 focus:ring-indigo-500 shadow-sm"
+                                    className="w-full max-w-full box-border bg-white dark:bg-slate-800 p-4 pl-10 rounded-2xl font-bold text-slate-800 dark:text-white border-none focus:ring-2 focus:ring-indigo-500 shadow-sm appearance-none min-w-0"
                                 />
                             </div>
                             {dateError && (
@@ -480,7 +480,7 @@ const ModificationsModal: React.FC<Props> = ({ isOpen, onClose, userId, vehicleI
 
                         <form onSubmit={handleConfirmInstall} className="space-y-4">
                             <div className="grid grid-cols-2 gap-4">
-                                <div className="space-y-1">
+                                <div className="space-y-1 min-w-0">
                                     <label className="text-xs font-bold text-slate-400 uppercase pl-1">{t('final_price')}</label>
                                     <input 
                                         type="number" 
@@ -489,17 +489,17 @@ const ModificationsModal: React.FC<Props> = ({ isOpen, onClose, userId, vehicleI
                                         step="0.01"
                                         value={installCost}
                                         onChange={e => setInstallCost(e.target.value)}
-                                        className="w-full bg-slate-100 dark:bg-slate-900 p-3 rounded-xl font-bold" 
+                                        className="w-full max-w-full box-border bg-slate-100 dark:bg-slate-900 p-3 rounded-xl font-bold appearance-none min-w-0" 
                                     />
                                 </div>
-                                <div className="space-y-1">
+                                <div className="space-y-1 min-w-0">
                                     <label className="text-xs font-bold text-slate-400 uppercase pl-1">{t('install_date')}</label>
                                     <input 
                                         type="date" 
                                         required
                                         value={installDate}
                                         onChange={e => setInstallDate(e.target.value)}
-                                        className="w-full bg-slate-100 dark:bg-slate-900 p-3 rounded-xl font-bold" 
+                                        className="w-full max-w-full box-border bg-slate-100 dark:bg-slate-900 p-3 rounded-xl font-bold appearance-none min-w-0" 
                                     />
                                     {installDateError && (
                                         <div className="text-xs text-rose-500 font-bold flex items-center gap-1 mt-1">
